@@ -162,17 +162,33 @@ Cannot find module `pydantic`
 Identify the root cause, apply the minimal fix, explain the cause, and provide any required commands.
 
 
-PROMPT 8: TITLE TAG AUDIT MODULE    
+PROMPT 8: V1 SEO AUDIT MODULES
 ==================================
 # Objective
 
-Implement the Title Tag audit module.
+Implement all Version 1 SEO audit modules.
 
 ## Tasks
 
-- Extract the page title from the rendered HTML.
-- Validate it against SEO best practices.
-- Return the extracted value, score, detected issues, and recommendations using the existing audit models.
-- Integrate it into the audit pipeline.
+- Implement the following audit modules:
+  - Title Tag
+  - Meta Description
+  - Canonical Tag
+  - Heading Structure (H1–H6)
+  - Open Graph Tags
+  - Twitter Card Tags
+  - Images & Alt Attributes
+  - Internal & External Links
+  - Meta Robots / Robots Directives
+  - Basic Structured Data detection
 
-Do not implement any other SEO checks.
+For each module:
+- Extract the required data from the rendered page.
+- Validate it against SEO best practices.
+- Generate a category score.
+- Generate deterministic, rules-based recommendations.
+- Integrate the result into the existing audit response.
+
+Reuse the existing architecture, models, and services wherever possible.
+
+Do not implement the overall scoring engine or frontend dashboard in this task.
