@@ -1,0 +1,88 @@
+PROMPT 1: INITIAL REQUIREMENT GATHERING
+============================================================
+# Role
+You are a Senior Software Architect and Technical Analyst.
+
+# Project Overview
+We are building a production-grade, stateless SEO Audit Tool. Users submit a website URL, and the application generates a comprehensive SEO audit displayed in a modern dashboard.
+
+# Initial Requirements
+- Accept a publicly accessible website URL.
+- Render the page using Python Playwright (Async API).
+- Analyze on-page SEO factors (Title, Meta Description, Canonical, Headings, Open Graph, Twitter Cards, Images, Links, Robots directives, etc.).
+- Generate an overall SEO score and category-wise scores.
+- Display key metrics and statistics with clean visualizations.
+- Provide actionable recommendations for detected issues.
+- Generate recommendations using a deterministic, rules-based engine (not a live LLM). AI-assisted recommendations may be considered as a future enhancement.
+- Remain completely stateless (no database or audit history).
+
+# Technology Stack
+- Frontend: Next.js (App Router, TypeScript, Tailwind CSS)
+- Backend: Python FastAPI
+- SEO Engine: Python Playwright (Async API)
+
+# Task
+Do not generate any code or specification files.
+
+Conduct a requirement-gathering session by:
+
+1. Summarizing your understanding of the project.
+2. Identifying the functional requirements.
+3. Identifying the non-functional requirements.
+4. Listing any technical assumptions.
+5. Highlighting ambiguities, risks, and edge cases.
+6. Asking all questions needed to finalize the project scope.
+
+# Constraints
+- Group all questions into a single list at the end.
+- Do not make implementation decisions or assumptions without explicitly mentioning them.
+- Focus only on requirements and architecture.
+- Be concise, structured, and technically precise.
+
+
+PROMPT 2: REQUIREMENT FINALIZATION & SPECIFICATION GENERATION
+============================================================
+The requirement analysis looks good overall.
+
+Use the following clarifications to finalize the project scope:
+
+- Accept only valid public HTTP/HTTPS URLs.
+- Audit only a single publicly accessible webpage per request.
+- Fully render JavaScript before performing the audit.
+- Audit the final redirected URL and report redirects as informational.
+- Focus on on-page SEO only for Version 1.
+- Exclude multi-page crawling, authentication-protected pages, and performance-related audits (e.g., Core Web Vitals) from Version 1.
+- Use a deterministic, rules-based scoring and recommendation engine.
+- Display both summary scores and extracted SEO data in the dashboard.
+- Expose a REST API with OpenAPI/Swagger documentation.
+
+For all remaining decisions, follow industry best practices and document any assumptions.
+
+## Next Task
+
+Create a comprehensive project specification document named `seo_tool_specs.md` in the repository root.
+
+This document will serve as the single source of truth throughout the development process. It should include the finalized requirements, project scope, technology stack, high-level architecture, coding standards, development constraints, folder structure, API design principles, UI/UX guidelines, assumptions, and any other information needed to guide future implementation phases.
+
+
+PROMPT 3: DEVELOPMENT WORKFLOW ESTABLISHMENT
+=============================================
+# Task
+
+Create `DEVELOPMENT_WORKFLOW.md` in the project root.
+
+This document will define the development methodology and orchestration rules for the entire project.
+
+Include guidelines for:
+
+- Incremental, phase-by-phase development.
+- Reading and following `seo_tool_specs.md` before every implementation task.
+- Implementing only the requested scope; never anticipating future phases.
+- Asking for clarification instead of making assumptions.
+- Keeping changes small, modular, maintainable, and avoiding unnecessary refactoring.
+- Following project coding standards and GitHub best practices (feature branches, meaningful commits, Pull Requests).
+- Validating changes before marking a task complete.
+- Defining a clear Definition of Done for each phase.
+- A **Context Recovery** section explaining how a new model should regain context by reading `seo_tool_specs.md` and `DEVELOPMENT_WORKFLOW.md` before making any changes.
+
+Keep the workflow concise, practical, and easy to follow.
