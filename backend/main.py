@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from routers.audit import router as audit_router
 from services.browser_manager import browser_manager
 
 
@@ -28,6 +29,8 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["*"],
 )
+
+app.include_router(audit_router)
 
 
 @app.get("/health", summary="Health check")
