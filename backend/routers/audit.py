@@ -18,6 +18,7 @@ from services.renderer import (
     RenderError,
     render_page,
 )
+from utils.url_validator import InvalidURLError, validate_public_url
 
 logger = logging.getLogger(__name__)
 
@@ -39,7 +40,14 @@ async def audit_url(body: AuditRequest) -> AuditResponse:
     url = str(body.url)
     logger.info("Audit requested for: %s", url)
 
-    # 1. Render the page
+    # 1. Validate the URL is publicly accessible (SSRF protection)
+    try:
+        validate_public_url(url)
+    except InvalidURLError as exc:
+        logger.warning("URL validation rejected: %s — %s", url, exc)
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    # 2. Render the page
     try:
         render_result = await render_page(url)
     except NavigationTimeoutError as exc:
