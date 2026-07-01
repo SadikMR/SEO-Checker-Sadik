@@ -192,3 +192,37 @@ For each module:
 Reuse the existing architecture, models, and services wherever possible.
 
 Do not implement the overall scoring engine or frontend dashboard in this task.
+
+
+PROMPT 9: SEO SCORING ENGINE
+==============================
+# Objective
+
+Implement the SEO scoring engine.
+
+## Tasks
+
+- Define the scoring methodology and category weights.
+- Calculate category scores.
+- Calculate the overall SEO score.
+- Aggregate issues and recommendations into the final audit result.
+- Ensure the scoring system is deterministic, configurable, and easy to extend.
+
+Reuse the existing audit modules and models. Do not modify their extraction logic unless necessary.
+
+
+PROMPT 10: AUDIT WORKFLOW (FRONTEND ↔ BACKEND)
+================================================
+# Objective
+
+Implement the audit workflow between the frontend and backend.
+
+## Tasks
+
+- Create a URL input form on the frontend.
+- Submit the URL to the audit API.
+- Display loading and error states.
+- Handle successful audit responses.
+- Keep the UI clean and responsive.
+
+Do not implement the results dashboard yet.
