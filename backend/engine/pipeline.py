@@ -19,23 +19,14 @@ from engine.rules.robots import audit_robots
 from engine.rules.structured_data import audit_structured_data
 from engine.rules.title import audit_title
 from engine.rules.twitter_card import audit_twitter_card
+from engine.scorer import compute_scores
 from schemas.audit import AuditResponse, RedirectInfo
 from schemas.issues import AuditIssue, AuditRecommendation
-from schemas.scores import CategoryName, CategoryScore, ScoreSummary
+from schemas.scores import CategoryName
 from schemas.seo_data import RawSEOData
 from services.renderer import RenderResult
 
 logger = logging.getLogger(__name__)
-
-CATEGORY_LABELS: dict[CategoryName, str] = {
-    CategoryName.META: "Meta Tags",
-    CategoryName.HEADINGS: "Headings",
-    CategoryName.IMAGES: "Images",
-    CategoryName.LINKS: "Links",
-    CategoryName.SOCIAL: "Social Tags",
-    CategoryName.ROBOTS: "Robots",
-    CategoryName.STRUCTURED_DATA: "Structured Data",
-}
 
 
 def run_audit(render_result: RenderResult) -> AuditResponse:
@@ -153,31 +144,9 @@ def run_audit(render_result: RenderResult) -> AuditResponse:
     raw_data.structured_data = sd_result.structured_data
 
     # ------------------------------------------------------------------
-    # Build category score list and compute overall score
+    # Compute weighted scores via the scoring engine
     # ------------------------------------------------------------------
-    scored_categories: list[CategoryScore] = []
-    for cat, scores_list in category_scores.items():
-        avg = round(sum(scores_list) / len(scores_list), 1)
-        scored_categories.append(CategoryScore(
-            category=cat,
-            score=avg,
-            max_score=100.0,
-            label=CATEGORY_LABELS.get(cat, cat.value),
-        ))
-
-    # Overall score = average of all category scores.
-    if scored_categories:
-        overall = round(
-            sum(c.score for c in scored_categories) / len(scored_categories),
-            1,
-        )
-    else:
-        overall = 0.0
-
-    scores = ScoreSummary(
-        overall_score=overall,
-        categories=scored_categories,
-    )
+    scores = compute_scores(category_scores)
 
     # ------------------------------------------------------------------
     # Build redirect list
@@ -190,8 +159,8 @@ def run_audit(render_result: RenderResult) -> AuditResponse:
     logger.info(
         "Audit complete for %s → overall score: %.1f (%d categories)",
         render_result.final_url,
-        overall,
-        len(scored_categories),
+        scores.overall_score,
+        len(scores.categories),
     )
 
     return AuditResponse(
