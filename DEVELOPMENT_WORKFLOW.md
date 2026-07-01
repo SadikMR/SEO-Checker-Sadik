@@ -44,10 +44,15 @@ This document defines the standard development process for the SEO Audit Tool an
 
 ## Git & Collaboration
 
-* Use a dedicated feature branch for each task or phase.
-* Make small, atomic commits with meaningful commit messages.
-* Keep Pull Requests focused on a single objective.
-* Reference the relevant specification or requirement whenever appropriate.
+Before starting any implementation task:
+
+1. Create a new feature branch using a meaningful name (e.g., `feature/project-init`, `feature/playwright-setup`).
+2. Implement only the requested scope.
+3. Make small, atomic commits with descriptive messages following Conventional Commits (e.g., `feat: initialize FastAPI project`).
+4. Keep Pull Requests focused on a single objective.
+5. Include a concise PR description summarizing the changes and reference the relevant specification or requirement.
+6. If Git operations are unavailable in the current environment, clearly state that limitation instead of skipping these steps silently.
+
 
 ---
 
