@@ -86,3 +86,214 @@ Include guidelines for:
 - A **Context Recovery** section explaining how a new model should regain context by reading `seo_tool_specs.md` and `DEVELOPMENT_WORKFLOW.md` before making any changes.
 
 Keep the workflow concise, practical, and easy to follow.
+
+
+PROMPT 4: BACKEND/FRONTEND HEALTH CHECK IMPLEMENTATION
+# Role
+
+You are a Senior Full-Stack Engineer.
+
+Read and follow:
+- `seo_tool_specs.md`
+- `DEVELOPMENT_WORKFLOW.md`
+
+Implement only the requested scope.
+
+# Objective
+
+Implement backend/frontend health check.
+
+## Tasks
+
+- Add a `GET /health` endpoint returning `{"status":"ok"}`.
+- Configure CORS for `http://localhost:3000`.
+- Update `frontend/app/page.tsx` to fetch `/health`.
+- Display a Tailwind "System Status" card showing **Connected** or **Offline/Error**.
+
+## Constraints
+
+- Modify only the required files.
+- Do not implement any SEO, Playwright, scoring, or dashboard functionality.
+
+
+PROMPT 5: PLAYWRIGHT RENDERING INFRASTRUCTURE
+===============================================
+# Objective
+
+Set up the Playwright rendering infrastructure.
+
+## Tasks
+
+- Configure Python Playwright in the backend.
+- Create a reusable browser manager.
+- Create a page rendering service.
+- Add timeout and basic error handling.
+- Provide the CLI command required to install the Playwright browser binaries in the virtual environment.
+
+
+PROMPT 6: AUDIT ENGINE FOUNDATION
+==================================
+# Objective
+
+Design the audit engine foundation.
+
+Tasks
+
+- Create the audit request and response schemas.
+- Define the audit result structure and category models.
+- Create reusable models for scores, issues, and recommendations.
+- Organize the project structure for future audit modules.
+
+Do not implement SEO extraction, scoring logic, or recommendations yet.
+
+
+
+PROMPT 7: DEBUGGING
+===================
+# Debug 
+
+I'm getting the following error:
+
+```text
+Cannot find module `pydantic`
+...
+```
+
+Identify the root cause, apply the minimal fix, explain the cause, and provide any required commands.
+
+
+PROMPT 8: V1 SEO AUDIT MODULES
+==================================
+# Objective
+
+Implement all Version 1 SEO audit modules.
+
+## Tasks
+
+- Implement the following audit modules:
+  - Title Tag
+  - Meta Description
+  - Canonical Tag
+  - Heading Structure (H1–H6)
+  - Open Graph Tags
+  - Twitter Card Tags
+  - Images & Alt Attributes
+  - Internal & External Links
+  - Meta Robots / Robots Directives
+  - Basic Structured Data detection
+
+For each module:
+- Extract the required data from the rendered page.
+- Validate it against SEO best practices.
+- Generate a category score.
+- Generate deterministic, rules-based recommendations.
+- Integrate the result into the existing audit response.
+
+Reuse the existing architecture, models, and services wherever possible.
+
+Do not implement the overall scoring engine or frontend dashboard in this task.
+
+
+PROMPT 9: SEO SCORING ENGINE
+==============================
+# Objective
+
+Implement the SEO scoring engine.
+
+## Tasks
+
+- Define the scoring methodology and category weights.
+- Calculate category scores.
+- Calculate the overall SEO score.
+- Aggregate issues and recommendations into the final audit result.
+- Ensure the scoring system is deterministic, configurable, and easy to extend.
+
+Reuse the existing audit modules and models. Do not modify their extraction logic unless necessary.
+
+
+PROMPT 10: AUDIT WORKFLOW (FRONTEND ↔ BACKEND)
+================================================
+# Objective
+
+Implement the audit workflow between the frontend and backend.
+
+## Tasks
+
+- Create a URL input form on the frontend.
+- Submit the URL to the audit API.
+- Display loading and error states.
+- Handle successful audit responses.
+- Keep the UI clean and responsive.
+
+Do not implement the results dashboard yet.
+
+
+PROMPT 11: SPEC REVIEW & GAP FIXES
+=====================================
+# Objective
+
+Review the current implementation against `seo_tool_specs.md` and identify any missing, incomplete, or incorrectly implemented features.
+
+## Tasks
+
+- Compare the implementation with the specification.
+- Identify missing UI elements (e.g., Canonical, Open Graph, Twitter Cards, etc.).
+- Verify that all implemented audit modules are displayed correctly in the frontend.
+- Verify that all backend audit modules are integrated into the API response.
+- Check whether features such as broken link detection and other required SEO checks are fully implemented.
+- Fix any gaps or inconsistencies you find.
+- Preserve the existing architecture and avoid unnecessary refactoring.
+
+## Output
+
+- A summary of the missing issues you found.
+- The changes made to resolve them.
+- Any remaining limitations (if applicable).
+
+
+PROMPT 12: SEO AUDIT RESULTS DASHBOARD
+=========================================
+# Objective
+
+Implement the SEO audit results dashboard.
+
+## Tasks
+
+- Display the overall SEO score.
+- Display category-wise scores.
+- Display extracted SEO data.
+- Display issues and recommendations.
+- Add clean visualizations (cards, progress bars, charts where appropriate).
+- Ensure the dashboard is responsive and follows the project design guidelines.
+
+
+PROMPT 13: PROJECT README
+============================
+# Objective
+
+Create a comprehensive `README.md` for the project.
+
+## Tasks
+
+Include:
+- Project overview
+- Features
+- Technology stack
+- Project structure
+- Prerequisites
+- Installation & setup
+- Environment variables
+- Running the frontend and backend
+- Installing Playwright browser binaries
+- API endpoints
+- Usage guide
+- Development workflow
+- Troubleshooting
+- Future enhancements
+
+## Requirements
+
+- The installation and setup instructions must be accurate, precise, and verified against the current project structure and implementation.
+- Document only implemented features and existing API endpoints.
+- Ensure all commands, file paths, environment variables, and scripts are correct.
+- Write the README in a professional, developer-friendly format suitable for GitHub.
