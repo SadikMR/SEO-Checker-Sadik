@@ -55,7 +55,7 @@ export default function Home() {
         </div>
       </nav>
 
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className={`mx-auto px-6 py-12 transition-all duration-300 ${state.status === "success" ? "max-w-5xl" : "max-w-3xl"}`}>
         {/* Hero — shown when idle or on error */}
         {(state.status === "idle" ||
           state.status === "loading" ||
