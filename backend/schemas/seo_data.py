@@ -110,6 +110,25 @@ class RobotsData(BaseModel):
     )
 
 
+class StructuredDataInfo(BaseModel):
+    """Basic structured data detection results."""
+
+    has_json_ld: bool = Field(
+        False, description="Whether JSON-LD script tags were found."
+    )
+    json_ld_types: list[str] = Field(
+        default_factory=list,
+        description="List of @type values found in JSON-LD blocks.",
+    )
+    has_microdata: bool = Field(
+        False, description="Whether microdata (itemscope) attributes were found."
+    )
+    microdata_types: list[str] = Field(
+        default_factory=list,
+        description="List of itemtype values found in microdata.",
+    )
+
+
 # ------------------------------------------------------------------
 # Aggregate raw data model
 # ------------------------------------------------------------------
@@ -142,4 +161,8 @@ class RawSEOData(BaseModel):
     )
     robots: RobotsData = Field(
         default_factory=RobotsData, description="Robots directive data."
+    )
+    structured_data: StructuredDataInfo = Field(
+        default_factory=StructuredDataInfo,
+        description="Basic structured data detection.",
     )

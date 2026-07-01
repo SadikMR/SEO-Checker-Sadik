@@ -16,6 +16,7 @@ from schemas.seo_data import (
     OpenGraphData,
     RawSEOData,
     RobotsData,
+    StructuredDataInfo,
     TwitterCardData,
 )
 
@@ -41,5 +42,6 @@ __all__ = [
     "OpenGraphData",
     "RawSEOData",
     "RobotsData",
+    "StructuredDataInfo",
     "TwitterCardData",
 ]

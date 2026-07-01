@@ -33,6 +33,7 @@ class CategoryName(str, Enum):
     LINKS = "links"
     SOCIAL = "social"
     ROBOTS = "robots"
+    STRUCTURED_DATA = "structured_data"
 
 
 class CategoryScore(BaseModel):
