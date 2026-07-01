@@ -249,3 +249,51 @@ Review the current implementation against `seo_tool_specs.md` and identify any m
 - A summary of the missing issues you found.
 - The changes made to resolve them.
 - Any remaining limitations (if applicable).
+
+
+PROMPT 12: SEO AUDIT RESULTS DASHBOARD
+=========================================
+# Objective
+
+Implement the SEO audit results dashboard.
+
+## Tasks
+
+- Display the overall SEO score.
+- Display category-wise scores.
+- Display extracted SEO data.
+- Display issues and recommendations.
+- Add clean visualizations (cards, progress bars, charts where appropriate).
+- Ensure the dashboard is responsive and follows the project design guidelines.
+
+
+PROMPT 13: PROJECT README
+============================
+# Objective
+
+Create a comprehensive `README.md` for the project.
+
+## Tasks
+
+Include:
+- Project overview
+- Features
+- Technology stack
+- Project structure
+- Prerequisites
+- Installation & setup
+- Environment variables
+- Running the frontend and backend
+- Installing Playwright browser binaries
+- API endpoints
+- Usage guide
+- Development workflow
+- Troubleshooting
+- Future enhancements
+
+## Requirements
+
+- The installation and setup instructions must be accurate, precise, and verified against the current project structure and implementation.
+- Document only implemented features and existing API endpoints.
+- Ensure all commands, file paths, environment variables, and scripts are correct.
+- Write the README in a professional, developer-friendly format suitable for GitHub.
