@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useAudit } from "./components/useAudit";
 import UrlForm from "./components/UrlForm";
-import AuditSummary from "./components/AuditSummary";
+import AuditDashboard from "./components/AuditSummary";
 
 type BackendStatus = "checking" | "online" | "offline";
 
@@ -160,7 +160,7 @@ export default function Home() {
 
         {/* Success — show audit summary */}
         {state.status === "success" && (
-          <AuditSummary data={state.data} onReset={reset} />
+          <AuditDashboard data={state.data} onReset={reset} />
         )}
 
         {/* Features row — shown only on idle */}

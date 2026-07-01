@@ -87,6 +87,7 @@ export interface LinkData {
 export interface RobotsData {
   meta_robots: string | null;
   x_robots_tag: string | null;
+  robots_txt_disallowed: boolean;
 }
 
 export interface StructuredDataInfo {
