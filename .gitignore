@@ -1,0 +1,9 @@
+# Root ignores
+node_modules
+.DS_Store
+.env
+
+defaults:
+/frontend/node_modules
+/frontend/.next
+/backend/__pycache__
