@@ -112,7 +112,7 @@ def run_audit(render_result: RenderResult) -> AuditResponse:
     # ------------------------------------------------------------------
     # 9. Meta Robots / Robots Directives
     # ------------------------------------------------------------------
-    robots_result = audit_robots(html)
+    robots_result = audit_robots(html, page_url=page_url)
     _collect(CategoryName.ROBOTS, robots_result.score,
              robots_result.issues, robots_result.recommendations)
 

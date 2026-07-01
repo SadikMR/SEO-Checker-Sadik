@@ -108,6 +108,10 @@ class RobotsData(BaseModel):
         None,
         description="Value of the X-Robots-Tag HTTP header, if present.",
     )
+    robots_txt_disallowed: bool = Field(
+        False,
+        description="Whether the page URL is disallowed by robots.txt.",
+    )
 
 
 class StructuredDataInfo(BaseModel):
