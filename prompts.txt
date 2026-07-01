@@ -226,3 +226,26 @@ Implement the audit workflow between the frontend and backend.
 - Keep the UI clean and responsive.
 
 Do not implement the results dashboard yet.
+
+
+PROMPT 11: SPEC REVIEW & GAP FIXES
+=====================================
+# Objective
+
+Review the current implementation against `seo_tool_specs.md` and identify any missing, incomplete, or incorrectly implemented features.
+
+## Tasks
+
+- Compare the implementation with the specification.
+- Identify missing UI elements (e.g., Canonical, Open Graph, Twitter Cards, etc.).
+- Verify that all implemented audit modules are displayed correctly in the frontend.
+- Verify that all backend audit modules are integrated into the API response.
+- Check whether features such as broken link detection and other required SEO checks are fully implemented.
+- Fix any gaps or inconsistencies you find.
+- Preserve the existing architecture and avoid unnecessary refactoring.
+
+## Output
+
+- A summary of the missing issues you found.
+- The changes made to resolve them.
+- Any remaining limitations (if applicable).
