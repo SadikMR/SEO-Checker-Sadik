@@ -1,6 +1,13 @@
 # SEO Checker
 
-A production-grade, stateless SEO Audit Tool. Submit any publicly accessible URL and receive a comprehensive SEO report in seconds — complete with a weighted overall score, category breakdowns, extracted metadata, detected issues, and actionable recommendations.
+> A production-grade, stateless SEO Audit Tool. Submit any publicly accessible URL and receive a comprehensive SEO report — complete with a weighted overall score, category breakdowns, extracted metadata, detected issues, and actionable recommendations.
+
+**Live demo:** [seo-checker-sadik-w3.vercel.app](https://seo-checker-sadik-w3.vercel.app)  
+**API:** [seo-checker-backend-x38s.onrender.com](https://seo-checker-backend-x38s.onrender.com)  
+**API Docs:** [seo-checker-backend-x38s.onrender.com/docs](https://seo-checker-backend-x38s.onrender.com/docs)  
+**Repo:** [github.com/SadikMR/SEO-Checker-Sadik](https://github.com/SadikMR/SEO-Checker-Sadik)
+
+> ⏱️ **Note:** The backend runs on Render's free tier and may take 30–50 seconds to wake up after a period of inactivity. Subsequent requests are fast.
 
 ---
 
@@ -27,16 +34,20 @@ A production-grade, stateless SEO Audit Tool. Submit any publicly accessible URL
 | Browser automation | Playwright (Chromium, Async API) |
 | HTML parsing | BeautifulSoup4 |
 | API docs | FastAPI OpenAPI / Swagger UI |
+| Frontend hosting | Vercel (free) |
+| Backend hosting | Render (free, Docker) |
 
 ---
 
 ## Project Structure
 
 ```
-seo-checker/
+SEO-Checker-Sadik/
 ├── backend/
 │   ├── main.py                   # FastAPI entry point, CORS, lifespan
 │   ├── requirements.txt          # Python dependencies
+│   ├── Dockerfile                # Production Docker image (for Render)
+│   ├── .dockerignore
 │   ├── engine/
 │   │   ├── pipeline.py           # Orchestrates all audit modules
 │   │   ├── scorer.py             # Weighted scoring engine
@@ -78,6 +89,8 @@ seo-checker/
 │   ├── tailwind.config.ts
 │   ├── tsconfig.json
 │   └── package.json
+├── render.yaml                   # Render deployment config
+├── vercel.json                   # Vercel deployment config
 ├── seo_tool_specs.md             # Project specification
 ├── DEVELOPMENT_WORKFLOW.md       # Git and development guidelines
 └── README.md
@@ -102,8 +115,8 @@ seo-checker/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/seo-checker.git
-cd seo-checker
+git clone https://github.com/SadikMR/SEO-Checker-Sadik.git
+cd SEO-Checker-Sadik
 ```
 
 ### 2. Backend setup
@@ -136,11 +149,7 @@ npm install
 
 ### Backend
 
-The backend currently uses no environment variables. All configuration (CORS origins, timeouts) is defined in source code.
-
-| Variable | Default | Description |
-|---|---|---|
-| *(none required)* | — | — |
+The backend uses no environment variables. CORS origins and timeouts are configured in source code.
 
 To change the allowed frontend origin, edit `allow_origins` in `backend/main.py`.
 
@@ -158,7 +167,7 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 
 ---
 
-## Running the Application
+## Running Locally
 
 ### Start the backend
 
@@ -201,6 +210,39 @@ playwright install-deps chromium
 ```
 
 > The backend will fail to start if Chromium is not installed. You will see a `BrowserType.launch: Executable doesn't exist` error.
+
+---
+
+## Deployment
+
+The project is deployed for free using **Vercel** (frontend) and **Render** (backend).
+
+### Live URLs
+
+| Service | URL |
+|---|---|
+| Frontend | https://seo-checker-sadik-w3.vercel.app |
+| Backend API | https://seo-checker-backend-x38s.onrender.com |
+| API Docs | https://seo-checker-backend-x38s.onrender.com/docs |
+
+### Deploy your own instance
+
+#### Backend → Render (free)
+
+1. Go to [render.com](https://render.com) and connect your GitHub repo
+2. Create a new **Web Service**
+3. Set **Root Directory** to `backend`, **Runtime** to `Docker`, **Plan** to `Free`
+4. Render will build the `backend/Dockerfile` automatically
+
+#### Frontend → Vercel (free)
+
+1. Go to [vercel.com/new](https://vercel.com/new) and import `SadikMR/SEO-Checker-Sadik`
+2. In the **Configure Project** screen, set **Root Directory** to `frontend`
+3. Add environment variable:
+   - `NEXT_PUBLIC_API_URL` = `https://your-render-backend-url.onrender.com`
+4. Click **Deploy**
+
+> **Important:** `NEXT_PUBLIC_API_URL` is baked into the Next.js build at compile time. If you change it after deploying, you must **redeploy** (not just save the env var).
 
 ---
 
@@ -259,14 +301,14 @@ Run a full SEO audit on a publicly accessible URL.
     }
   ],
   "raw_data": {
-    "meta": { "title": "Example Domain", "title_length": 14, ... },
-    "headings": { "h1": ["Example Domain"], "h1_count": 1, ... },
-    "open_graph": { "og_title": null, ... },
-    "twitter_card": { "card": null, ... },
-    "images": { "total_images": 0, "images_with_alt": 0, ... },
-    "links": { "total_links": 1, "internal_links": 0, "external_links": 1, ... },
-    "robots": { "meta_robots": null, "robots_txt_disallowed": false },
-    "structured_data": { "has_json_ld": false, "json_ld_types": [] }
+    "meta": { "title": "Example Domain", "title_length": 14, "description": null, "canonical": null },
+    "headings": { "h1": ["Example Domain"], "h1_count": 1, "h2": [], ... },
+    "open_graph": { "og_title": null, "og_description": null, "og_image": null, ... },
+    "twitter_card": { "card": null, "title": null, ... },
+    "images": { "total_images": 0, "images_with_alt": 0, "images_without_alt": 0 },
+    "links": { "total_links": 1, "internal_links": 0, "external_links": 1, "nofollow_links": 0 },
+    "robots": { "meta_robots": null, "x_robots_tag": null, "robots_txt_disallowed": false },
+    "structured_data": { "has_json_ld": false, "json_ld_types": [], "has_microdata": false, "microdata_types": [] }
   }
 }
 ```
@@ -302,9 +344,9 @@ Category scores are averaged from their constituent rule scores. The overall sco
 
 ## Usage Guide
 
-1. Open **http://localhost:3000** in your browser
+1. Open [seo-checker-sadik-w3.vercel.app](https://seo-checker-sadik-w3.vercel.app) or **http://localhost:3000** locally
 2. Enter a full URL including the scheme (e.g. `https://example.com`)
-3. Click **Analyse** — the audit typically takes 10–30 seconds depending on the target page's load time
+3. Click **Analyse** — the audit typically takes 10–30 seconds
 4. Review the results dashboard:
    - **Score banner** — overall score (0–100) with letter grade (A–F)
    - **Category cards** — per-category scores with mini donut charts
@@ -376,19 +418,25 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Frontend cannot reach the API (`API Offline` badge)
+### Frontend shows "API Offline" badge
 
-- Ensure the backend is running (`uvicorn main:app --reload` in `backend/`)
-- Confirm the backend is on port 8000
-- Check `NEXT_PUBLIC_API_URL` in `frontend/.env.local` if using a non-default port
+**Locally:** Ensure the backend is running (`uvicorn main:app --reload` in `backend/`).
+
+**On Vercel:** The `NEXT_PUBLIC_API_URL` env var was not set before the build ran. Fix:
+1. Vercel → Settings → Environment Variables → add `NEXT_PUBLIC_API_URL`
+2. Deployments → Redeploy (a new build is required — env vars are baked in at build time)
 
 ### Audit returns `504 Gateway Timeout`
 
-The target page took longer than 30 seconds to load. This is normal for very large or slow pages. The timeout is configurable in `backend/services/renderer.py` → `DEFAULT_TIMEOUT_MS`.
+The target page took longer than 30 seconds to load. The timeout is configurable in `backend/services/renderer.py` → `DEFAULT_TIMEOUT_MS`.
+
+### First request on Render is very slow (30–50 seconds)
+
+This is expected on the free tier. Render spins down the service after 15 minutes of inactivity. The first request wakes it up. Subsequent requests are fast.
 
 ### CORS errors in browser console
 
-The default CORS configuration allows only `http://localhost:3000`. If your frontend runs on a different origin, update `allow_origins` in `backend/main.py`.
+Update `allow_origin_regex` in `backend/main.py` to include your frontend's origin.
 
 ### `http://localhost` returns 400
 
@@ -397,8 +445,6 @@ This is expected. The URL validator blocks `localhost`, private IP addresses, an
 ---
 
 ## Future Enhancements
-
-The following features are out of scope for Version 1 but represent natural next steps:
 
 - **API contract and unit tests** — pytest for backend rules and scoring; Jest/Vitest for frontend components
 - **PDF / shareable report export** — generate a downloadable audit report
