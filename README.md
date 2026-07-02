@@ -100,14 +100,21 @@ SEO-Checker-Sadik/
 
 ## Screenshots
 
-A selection of dashboard and audit screenshots is available in the [screenshots](screenshots) folder:
+A selection of dashboard and audit screenshots is available in the [screenshots](screenshots) folder.
 
-- [Homepage](screenshots/Homepage.png)
-- [Audit Analysis](screenshots/Audit_Analyzing.png)
-- [Audit Report 1](screenshots/Audit-Report-1.png)
-- [Audit Report 2](screenshots/Audit_Report-2.png)
-- [Audit Report Moderate 1](screenshots/Audit_Report_Moderate-1.png)
-- [Audit Report Moderate 2](screenshots/Audit_Report_Moderate-2.png)
+### Preview
+
+![Homepage](screenshots/Homepage.png)
+
+![Audit Analysis](screenshots/Audit_Analyzing.png)
+
+![Audit Report 1](screenshots/Audit-Report-1.png)
+
+![Audit Report 2](screenshots/Audit_Report-2.png)
+
+![Audit Report Moderate 1](screenshots/Audit_Report_Moderate-1.png)
+
+![Audit Report Moderate 2](screenshots/Audit_Report_Moderate-2.png)
 
 ---
 
