@@ -24,7 +24,12 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    # Allow localhost for local development and all Vercel preview/production
+    # deployments. Set ALLOWED_ORIGIN env var on Render to lock it down further.
+    allow_origins=[
+        "http://localhost:3000",
+    ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["GET", "POST"],
     allow_headers=["*"],

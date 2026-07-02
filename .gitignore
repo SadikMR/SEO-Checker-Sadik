@@ -1,9 +1,21 @@
-# Root ignores
-node_modules
+# ── macOS ──────────────────────────────────────────────────────────────────
 .DS_Store
-.env
 
-defaults:
-/frontend/node_modules
-/frontend/.next
-/backend/__pycache__
+# ── Environment files ──────────────────────────────────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Frontend ───────────────────────────────────────────────────────────────
+/frontend/node_modules/
+/frontend/.next/
+/frontend/tsconfig.tsbuildinfo
+
+# ── Backend ────────────────────────────────────────────────────────────────
+/backend/venv/
+/backend/__pycache__/
+/backend/**/__pycache__/
+/backend/*.pyc
+/backend/.pytest_cache/
+/backend/.mypy_cache/
+/backend/.ruff_cache/
